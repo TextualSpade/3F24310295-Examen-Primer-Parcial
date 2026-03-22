@@ -1,0 +1,67 @@
+@startuml RentaFacil
+
+class RentaFacil {
+    - Clientes
+    - Vehiculos
+    - Alquileres
+    + AgregarCliente()
+    + AgregarVehiculo()
+    + RegistrarAlquiler()
+    + FinalizarAlquiler()
+    + ValidarDisponibilidadVehiculo()
+    + ValidarLimiteVehiculos()
+}
+
+class Cliente {
+    - Id
+    - Nombre
+    - Dni
+    - Telefono
+}
+
+class Vehiculo {
+    - Placa
+    - Marca
+    - Modelo
+    - Anio
+    - PrecioPorDia
+    + MarcarDisponible()
+    + MarcarNoDisponible()
+}
+
+class Auto
+
+class Moto {
+    - Cilindrada
+}
+
+class Camioneta {
+    - CapacidadCarga
+}
+
+class Alquiler {
+    - CodigoAlquiler
+    - FechaInicio
+    - FechaFin
+    - CostoTotal
+    - Estado
+    + CalcularCostoTotal()
+    + Finalizar()
+}
+
+Auto --|> Vehiculo
+Moto --|> Vehiculo
+Camioneta --|> Vehiculo
+
+RentaFacil "1" *-- "0..*" Cliente
+RentaFacil "1" *-- "0..*" Vehiculo
+RentaFacil "1" *-- "0..*" Alquiler
+
+RentaFacil "1" o-- "0..*" Cliente
+RentaFacil "1" o-- "0..*" Vehiculo
+RentaFacil "1" o-- "0..*" Alquiler
+
+Alquiler "1" o-- "1" Cliente
+Alquiler "1" o-- "1..3" Vehiculo
+
+@enduml
